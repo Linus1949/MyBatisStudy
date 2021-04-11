@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace is blinded with Mapper Interface-->
+<mapper namespace="com.ssm.mapper.UserMapper">
+    <select id="getUserList" resultType="com.ssm.pojo.User">
+        select * from sql_mybatis.user;
+    </select>
+
+    <select id="getUserById" resultType="com.ssm.pojo.User" parameterType="int">
+        select * from sql_mybatis.user where id=${id};
+    </select>
+
+    <select id="getUserById2" resultType="com.ssm.pojo.User" parameterType="map">
+        select * from sql_mybatis.user where id=#{userId};
+    </select>
+
+    <insert id="addUser" parameterType="com.ssm.pojo.User">
+        insert into sql_mybatis.user (id, name, pwd) values (#{id},#{name},#{pwd});
+    </insert>
+
+    <insert id="addUser2" parameterType="map">
+        insert into sql_mybatis.user (id, name, pwd) values (#{userId},#{userName},#{userPwd});
+    </insert>
+    <update id="updateUser" parameterType="com.ssm.pojo.User">
+        update sql_mybatis.user set name=#{name}, pwd=#{pwd} where id=#{id};
+    </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from sql_mybatis.user where id=#{id};
+    </delete>
+
+    <select id="searchUserByName" parameterType="string" resultType="com.ssm.pojo.User">
+        select * from sql_mybatis.user where name regexp concat('.',#{name},'.');
+    </select>
+</mapper>

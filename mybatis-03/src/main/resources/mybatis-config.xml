@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--core configuration for mybatis-->
+<configuration>
+    <!--Import otter properties-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!--Implantation for stander logging factory-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--Aliases for pojo classes-->
+    <typeAliases>
+        <typeAlias type="com.ssm.pojo.User" alias="User"/>
+    </typeAliases>
+
+    <environments default="test">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--Every Mapper XML need to registry in the core configuration-->
+    <mappers>
+        <mapper resource="com/ssm/mapper/UserMapper.xml"/>
+
+<!--        Attention! for class and package scan methods there are 2 limits-->
+<!--        1:  Interface and xml file must have same name-->
+<!--        2: Interface and xml file must be saved in one directory-->
+<!--        <mapper class="com.ssm.mapper.UserMapper"/>-->
+<!--        <package name="com.ssm.mapper"/>-->
+    </mappers>
+</configuration>
